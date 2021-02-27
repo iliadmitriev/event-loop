@@ -18,7 +18,7 @@ while True:
 
     while True:
         buff = client_socket.recv(4096)
-        print(f'Recv {len(buff)} bytes from client')
+        print(f'Recv {len(buff)} bytes from client {addr}')
 
         if not buff:
             break
