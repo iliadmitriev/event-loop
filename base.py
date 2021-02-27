@@ -31,11 +31,20 @@ def send_message(client_socket, addr):
         buff = client_socket.recv(4096)
         print(f'Recv {len(buff)} bytes from client {addr}')
 
-        if not buff:
+        if buff:
+            client_socket.send(
+                b'HTTP/1.1 200 OK\r\n'
+                b'Content-Length: 11\r\n'
+                b'Content-Type: text/plain\r\n'
+                b'\r\n'
+                b'Hello World'
+            )
+            print(f'Send data to client {addr}')
+            client_socket.close()
             break
         else:
-            client_socket.send(b'Hello world\n')
-            print(f'Send hello to client')
+            client_socket.close()
+            break
 
 
 if __name__ == '__main__':
