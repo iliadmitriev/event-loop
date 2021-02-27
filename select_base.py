@@ -30,9 +30,14 @@ def send_message(client_socket):
     print(f'Recv {len(buff)} bytes from client {remote_addr}')
 
     if buff:
-        client_socket.send(b'Hello world\n')
-        print(f'Send hello to client')
+        client_socket.send(
+            b'HTTP/1.1 200 OK\r\n'
+            b'Content-Length: 0\r\r'
+            b'\r\n\r\n'
+        )
+        print(f'Send data to client {remote_addr}')
     else:
+        sock_list.remove(client_socket)
         client_socket.close()
         print(f'Client disconnected from {remote_addr}')
 
