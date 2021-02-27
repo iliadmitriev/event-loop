@@ -32,10 +32,14 @@ def send_message(client_socket):
     if buff:
         client_socket.send(
             b'HTTP/1.1 200 OK\r\n'
-            b'Content-Length: 0\r\r'
-            b'\r\n\r\n'
+            b'Content-Length: 11\r\n'
+            b'Content-Type: text/plain\r\n'
+            b'\r\n'
+            b'Hello World'
         )
         print(f'Send data to client {remote_addr}')
+        sock_list.remove(client_socket)
+        client_socket.close()
     else:
         sock_list.remove(client_socket)
         client_socket.close()
